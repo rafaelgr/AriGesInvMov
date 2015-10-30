@@ -1,11 +1,11 @@
-<?xml version="1.4" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ionicframework.app2015926932" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>app2015</name>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<widget id="com.ariadnasw.arigesinvmov" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+  <name>ariges_inv_mov</name>
   <description>
-        An Ionic Framework and Cordova project.
+        Gestion movil de inventatio para AriGes
     </description>
-  <author email="hi@ionicframework" href="http://ionicframework.com/">
-      Ionic Framework Team
+  <author email="rafa@myariadna.com" href="http://ariadnasw.com/">
+      Rafael Garcia (Ariadna Software S.L.)
     </author>
   <content src="index.html"/>
   <access origin="*"/>
