@@ -1,11 +1,11 @@
 // Ionic Starter App
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
+// 'arigesinvmov' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-// 'starter.services' is found in services.js
-// 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic','ionic.service.core', 'starter.controllers', 'starter.services'])
+// 'arigesinvmov.services' is found in services.js
+// 'arigesinvmov.controllers' is found in controllers.js
+angular.module('arigesinvmov', ['ionic','ionic.service.core', 'arigesinvmov.controllers', 'arigesinvmov.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
