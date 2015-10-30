@@ -1,0 +1,26 @@
+<!--
+  This template loads for the 'tab.friend-detail' state (app.js)
+  'friend' is a $scope variable created in the FriendsCtrl controller (controllers.js)
+  The FriendsCtrl pulls data from the Friends service (service.js)
+  The Friends service returns an array of friend data
+-->
+<ion-view view-title="{{chat.name}}">
+    <ion-content class="padding">
+        <ion-list>
+            <ion-item>
+                <h2>Artículo: Nombre del artículo</h2>
+                <p>Precio (Con IVA): {{26.23}}</p>
+            </ion-item>
+            <ion-item>
+              Stock calculado: {{chat.stock}}
+            </ion-item>
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Stock real</span>
+                <input type="text" placeholder="Stock real">
+            </label>                
+        </ion-list>
+        <button class="button button-block icon-left ion-ios-gear">
+            Actualizar stock
+        </button>        
+    </ion-content>
+</ion-view>

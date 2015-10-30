@@ -1,0 +1,31 @@
+<ion-view view-title="AriGesInv - INVENTARIO">
+    <ion-content>
+        <ion-list>
+            <div class="item item-input-inset">
+                <label class="item-input-wrapper">
+                    <input type="text" placeholder="EAN / UPC artículo">
+                </label>
+                <button class="button button-small icon-left ion-ios-color-wand">
+                    ESCANER
+                </button>
+            </div>
+            <div class="item">
+                <button class="button button-block icon-left ion-search">
+                    Buscar
+                </button>
+            </div>
+            <div class="item">
+              <h2>Nombre del artículo</h2>
+              <p>Precio (Con IVA): 263,22 €</p>
+            </div>
+            <div class="item item-divider">
+                Stock por almacenes
+            </div>
+            <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="chat in chats" type="item-text-wrap" href="#/tab/inventario-detail/{{chat.id}}">
+                <h2>{{chat.name}}</h2>
+                <span class="badge badge-positive">{{chat.stock}}</span>
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>
