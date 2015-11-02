@@ -1,6 +1,6 @@
 <ion-view view-title="AriGesInv - LOGIN">
     <ion-content class="padding">
-        <div class="list">
+        <div class="list" ng-hide="isUser">
             <div class="item item-avatar">
                 <img src="/img/ariadna.png">
                 <h2>AriGesInv Control Inventario</h2>
@@ -8,15 +8,28 @@
             </div>
             <label class="item item-input item-floating-label">
                 <span class="input-label">Login</span>
-                <input type="text" placeholder="Login">
+                <input type="text" placeholder="Login" ng-model="loginData.login">
             </label>
             <label class="item item-input item-floating-label">
                 <span class="input-label">Contraseña</span>
-                <input type="password" placeholder="Contraseña">
+                <input type="password" placeholder="Contraseña" ng-model="loginData.password">
             </label>
+            <button class="button button-block" ng-click="login()">
+                Entrar
+            </button>
         </div>
-        <button class="button button-block">
-            Entrar
-        </button>
+        <div class="list" ng-show="isUser">
+            <div class="item item-avatar">
+                <img src="/img/ariadna.png">
+                <h2>AriGesInv Control Inventario</h2>
+                <p>(c) Ariadna Software S.L.</p>
+            </div>
+            <div class="item">
+                <h2>Usuario: {{user.NomUsu}}</h2>
+            </div>
+            <button class="button button-block" ng-click="logout()">
+                Salir
+            </button>
+        </div>
     </ion-content>
 </ion-view>

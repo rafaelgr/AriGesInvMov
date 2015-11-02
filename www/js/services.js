@@ -67,3 +67,60 @@ angular.module('arigesinvmov.services', [])
     return LSAPI;
 
 }])
+
+.factory('ConfigFactory', ['LSFactory', function(LSFactory) {
+    var configKey = "config";
+
+    var CONFIGAPI = {
+        isConfig: function() {
+            return this.getConfig() === null ? false : true;
+        },
+        getConfig: function() {
+            return LSFactory.get(configKey);
+        },
+        setConfig: function(config) {
+            return LSFactory.set(configKey, config);
+        }
+    };
+    return CONFIGAPI;
+}])
+
+
+.factory('UserFactory', ['$http', 'LSFactory', 'ConfigFactory', 'Loader',
+    function($http, LSFactory, ConfigFactory, Loader) {
+        var userKey = "user";
+
+        var UserAPI = {
+            login: function(login) {
+                return $http.post(ConfigFactory.getConfig().urlApi + '/api/login/GetLogin', login);
+            },
+            isUser: function() {
+                return this.getUser() === null ? false : true;
+            },
+            getUser: function() {
+                return LSFactory.get(userKey);
+            },
+            setUser: function(user) {
+                return LSFactory.set(userKey, user);
+            },
+            logout: function() {
+                LSFactory.set(userKey, null);
+                return null;
+            }
+
+        };
+        return UserAPI;
+    }
+])
+
+.factory('InventarioFactory', ['ConfigFactory','$http', function(ConfigFactory, $http) {
+    var InventarioAPI = {
+        getArticulo: function(ean) {
+            return $http.post(ConfigFactory.getConfig().urlApi + '/api/inventario/GetArticuloEan', ean);
+        },
+        getArticulos: function(ean) {
+            return $http.post(ConfigFactory.getConfig().urlApi + '/api/inventario/GetArticulosEan', ean);
+        }
+    };
+    return InventarioAPI;
+}])

@@ -45,7 +45,7 @@ angular.module('arigesinvmov', ['ionic','ionic.service.core', 'arigesinvmov.cont
     views: {
       'tab-login': {
         templateUrl: 'templates/tab-login.html',
-        controller: 'DashCtrl'
+        controller: 'LoginCtrl'
       }
     }
   })
@@ -55,16 +55,16 @@ angular.module('arigesinvmov', ['ionic','ionic.service.core', 'arigesinvmov.cont
       views: {
         'tab-inventario': {
           templateUrl: 'templates/tab-inventario.html',
-          controller: 'ChatsCtrl'
+          controller: 'InventarioCtrl'
         }
       }
     })
     .state('tab.inventario-detail', {
-      url: '/inventario-detail/:inventarioId',
+      url: '/inventario-detail/:codalmac',
       views: {
         'tab-inventario': {
           templateUrl: 'templates/inventario-detail.html',
-          controller: 'ChatDetailCtrl'
+          controller: 'InventarioDetalleCtrl'
         }
       }
     })
@@ -74,7 +74,7 @@ angular.module('arigesinvmov', ['ionic','ionic.service.core', 'arigesinvmov.cont
     views: {
       'tab-configuracion': {
         templateUrl: 'templates/tab-configuracion.html',
-        controller: 'AccountCtrl'
+        controller: 'ConfigCtrl'
       }
     }
   });
