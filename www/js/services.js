@@ -120,6 +120,9 @@ angular.module('arigesinvmov.services', [])
         },
         getArticulos: function(ean) {
             return $http.post(ConfigFactory.getConfig().urlApi + '/api/inventario/GetArticulosEan', ean);
+        },
+        setInventario: function(data) {
+            return $http.post(ConfigFactory.getConfig().urlApi + '/api/inventario/SetInventario', data);
         }
     };
     return InventarioAPI;

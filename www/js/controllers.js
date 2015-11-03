@@ -30,7 +30,11 @@ angular.module('arigesinvmov.controllers', [])
             }).
             error(function(err, statusCode) {
                 Loader.hideLoading();
-                Loader.toggleLoadingWithMessage(err.message);
+                if (err) {
+                    Loader.toggleLoadingWithMessage(err.message);
+                } else {
+                    Loader.toggleLoadingWithMessage("Error de conexión. Revise configuración");
+                }
             });
         }
 
@@ -114,8 +118,8 @@ angular.module('arigesinvmov.controllers', [])
     }
 ])
 
-.controller('InventarioDetalleCtrl', ['$rootScope', '$scope', '$stateParams', 'Loader', 'UserFactory',
-    function($rootScope, $scope, $stateParams, Loader, UserFactory) {
+.controller('InventarioDetalleCtrl', ['$rootScope', '$scope', '$stateParams', 'Loader', 'UserFactory', 'InventarioFactory',
+    function($rootScope, $scope, $stateParams, Loader, UserFactory, InventarioFactory) {
 
         $scope.$on('$ionicView.enter', function(e) {
             if (!UserFactory.isUser()) {
@@ -137,7 +141,34 @@ angular.module('arigesinvmov.controllers', [])
 
         });
 
-        $scope.SetInventario = function(){
+        $scope.SetInventario = function() {
+            var usuario = UserFactory.getUser();
+            var data={
+                codartic: $scope.almacen.CodigoArticulo,
+                codalmac: $scope.almacen.CodigoAlmacen,
+                stock: $scope.almacen.Stock,
+                cantidad: $scope.datos.cantidad,
+                importe: $scope.almacen.PrecioUc,
+                codigope: usuario.Codtraba
+            };
+            Loader.showLoading('Actualizando stock..');
+            InventarioFactory.setInventario(data).
+            success(function(data) {
+                Loader.hideLoading();
+                if (data == "*") {
+                    Loader.toggleLoadingWithMessage("Stock actualizado correctamente.");
+                } else {
+                    Loader.toggleLoadingWithMessage(data);
+                }
+            }).
+            error(function(err, statusCode) {
+                Loader.hideLoading();
+                if (err){
+                Loader.toggleLoadingWithMessage(err);
+            }else{
+                Loader.toggleLoadingWithMessage("Error general. Posiblemente falla conexión.");
+            }
+            });
 
         };
     }
