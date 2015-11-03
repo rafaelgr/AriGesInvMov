@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'arigesinvmov.services' is found in services.js
 // 'arigesinvmov.controllers' is found in controllers.js
-angular.module('arigesinvmov', ['ionic','ionic.service.core', 'arigesinvmov.controllers', 'arigesinvmov.services'])
+angular.module('arigesinvmov', ['ionic','ionic.service.core', 'arigesinvmov.controllers', 'arigesinvmov.services', 'ngCordova'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {

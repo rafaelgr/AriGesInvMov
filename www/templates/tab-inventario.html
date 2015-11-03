@@ -1,11 +1,16 @@
 <ion-view view-title="AriGesInv - INVENTARIO">
     <ion-content>
         <ion-list>
+            <ion-item>
+                <ion-toggle ng-disabled="noLinterna" ng-model="linterna" ng-change="toggleTorch()">
+                    Linterna
+                </ion-toggle>
+            </ion-item>
             <ion-item class="item-input-inset">
                 <label class="item-input-wrapper">
                     <input type="text" placeholder="EAN / UPC artículo" ng-model="buscador.ean">
                 </label>
-                <button class="button button-small icon-left ion-ios-color-wand">
+                <button class="button button-small icon-left ion-ios-color-wand" ng-click="scanBarcode()">
                     ESCANER
                 </button>
             </ion-item>

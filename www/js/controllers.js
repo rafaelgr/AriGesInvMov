@@ -52,8 +52,8 @@ angular.module('arigesinvmov.controllers', [])
     }
 ])
 
-.controller('InventarioCtrl', ['$rootScope', '$scope', '$state', 'InventarioFactory', 'Loader', 'UserFactory',
-    function($rootScope, $scope, $state, InventarioFactory, Loader, UserFactory) {
+.controller('InventarioCtrl', ['$rootScope', '$scope', '$state', '$cordovaBarcodeScanner', '$ionicPlatform', '$cordovaFlashlight', 'InventarioFactory', 'Loader', 'UserFactory',
+    function($rootScope, $scope, $state, $cordovaBarcodeScanner, $ionicPlatform, $cordovaFlashlight, InventarioFactory, Loader, UserFactory) {
         // With the new view caching in Ionic, Controllers are only called
         // when they are recreated or on app start, instead of every page change.
         // To listen for when this page is active (for example, to refresh data),
@@ -79,6 +79,32 @@ angular.module('arigesinvmov.controllers', [])
             ean: ""
         };
 
+        $scope.noLinterna = true;
+
+        $ionicPlatform.ready(function() {
+            $cordovaFlashlight.available().then(function(availability) {
+                $scope.noLinterna = !availability;
+            });
+
+        });
+
+        $scope.toggleTorch = function() {
+            if ($scope.noLinterna) return;
+            Loader.toggleLoadingWithMessage("LINTERNA");
+            $cordovaFlashlight.toggle()
+                .then(function(success) { /* success */ },
+                    function(error) { /* error */ });
+        };
+
+        $scope.scanBarcode = function() {
+            Loader.toggleLoadingWithMessage("ESCANEANDO");
+            $cordovaBarcodeScanner.scan().then(function(imageData) {
+                $scope.buscador.ean = imageData.text;
+                $scope.getArticulos();
+            }, function(error) {
+                Loader.toggleLoadingWithMessage("Error escaner: " + error);
+            });
+        };
 
 
         $scope.cleanScope = function() {
@@ -143,7 +169,7 @@ angular.module('arigesinvmov.controllers', [])
 
         $scope.SetInventario = function() {
             var usuario = UserFactory.getUser();
-            var data={
+            var data = {
                 codartic: $scope.almacen.CodigoArticulo,
                 codalmac: $scope.almacen.CodigoAlmacen,
                 stock: $scope.almacen.Stock,
@@ -163,11 +189,11 @@ angular.module('arigesinvmov.controllers', [])
             }).
             error(function(err, statusCode) {
                 Loader.hideLoading();
-                if (err){
-                Loader.toggleLoadingWithMessage(err);
-            }else{
-                Loader.toggleLoadingWithMessage("Error general. Posiblemente falla conexión.");
-            }
+                if (err) {
+                    Loader.toggleLoadingWithMessage(err);
+                } else {
+                    Loader.toggleLoadingWithMessage("Error general. Posiblemente falla conexión.");
+                }
             });
 
         };
